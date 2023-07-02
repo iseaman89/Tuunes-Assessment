@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tuunes_Assessment.Views.ListenPage"
+             xmlns:model="clr-namespace:Tuunes_Assessment.Models"
+             xmlns:viewmodel="clr-namespace:Tuunes_Assessment.ViewModels"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             x:DataType="viewmodel:ListenViewModel"
+             Shell.NavBarIsVisible="False"
+             Title="ListenPage">
+    <ContentPage.Background>
+
+        <LinearGradientBrush >
+
+            <GradientStop Color="#11353e"
+                          Offset="0.1"/>
+
+            <GradientStop Color="#111b24"
+                          Offset="1.0"/>
+
+        </LinearGradientBrush>
+
+    </ContentPage.Background>
+
+    <ContentPage.Behaviors>
+
+    <mct:StatusBarBehavior StatusBarColor="#11353e" />
+
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="70, *">
+
+        <Label Text="Top 10 or more"
+               Grid.Row="0"
+               TextColor="White"
+               FontSize="30"
+               FontAttributes="Bold"
+               Margin="20, 20, 0, 10"/>
+
+        <CollectionView ItemsSource="{Binding Ringtons}"
+                        SelectionMode="None"
+                        Grid.Row="1">
+
+            <CollectionView.ItemTemplate>
+
+            <DataTemplate x:DataType="model:Rington">
+
+                <StackLayout>
+
+                    <Frame BackgroundColor="#363c44"
+                           BorderColor="#363c44"
+                           HasShadow="True"
+                           CornerRadius="15"
+                           HeightRequest="100"
+                           Margin="20, 1">
+
+                        <Frame.GestureRecognizers>
+
+                            <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                  Command="{Binding Source={x:RelativeSource
+                                                  AncestorType={x:Type viewmodel:ListenViewModel}},
+                                                  Path=GoToDetailCommand}"/>
+
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="Auto, Auto, *">
+
+                            <Border BackgroundColor="Transparent"
+                                    StrokeShape="RoundRectangle 20"
+                                    Grid.Column="0"
+                                    HorizontalOptions="Start"
+                                    WidthRequest="70"
+                                    HeightRequest="70">
+
+                            <Image Source="{Binding ImageSource}"
+                                   Aspect="AspectFill"/>
+
+                            </Border>
+
+                            <VerticalStackLayout Margin="5"
+                                                 Grid.Column="1"
+                                                 HorizontalOptions="Start">
+
+                                <Label Text="{Binding Titel}"
+                                       MaximumWidthRequest="200"
+                                       LineBreakMode="TailTruncation"
+                                       FontSize="Title"
+                                       TextColor="#ffffff"/>
+
+                                <Label Text="{Binding ArtistName}"
+                                       FontSize="Medium"
+                                       TextColor="#eeefef"/>
+
+                            </VerticalStackLayout>
+
+                            <Image Source="heart.svg"
+                                   Grid.Column="2"
+                                   WidthRequest="30"
+                                   HeightRequest="30"
+                                   HorizontalOptions="End"/>
+
+                        </Grid>
+
+                    </Frame>
+
+                </StackLayout>
+
+            </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+
+</ContentPage>

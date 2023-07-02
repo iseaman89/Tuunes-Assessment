@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tuunes_Assessment.Views.DetailPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:viewmodel="clr-namespace:Tuunes_Assessment.ViewModels"
+             x:DataType="viewmodel:DetailViewModel"
+             Shell.NavBarIsVisible="False"
+             Unloaded="DetailPageUnloaded">
+    <ContentPage.Background>
+
+        <LinearGradientBrush >
+
+            <GradientStop Color="#11353e"
+                          Offset="0.1"/>
+
+            <GradientStop Color="#111b24"
+                          Offset="1.0"/>
+
+        </LinearGradientBrush>
+
+    </ContentPage.Background>
+
+    <ContentPage.Behaviors>
+
+    <mct:StatusBarBehavior StatusBarColor="#11353e"/>
+
+    </ContentPage.Behaviors>
+
+    <VerticalStackLayout>
+
+        <ImageButton Source="back.png"
+                     Command="{Binding GoBackAsyncCommand}"
+                     WidthRequest="50"
+                     HeightRequest="50"
+                     HorizontalOptions="Start"/>
+
+        <Frame BackgroundColor="#363c44"
+               BorderColor="#363c44"
+               HasShadow="True"
+               CornerRadius="15"
+               Margin="15"
+               VerticalOptions="Center"
+               HorizontalOptions="Center">
+
+            <VerticalStackLayout>
+
+                <Border BackgroundColor="Transparent"
+                        StrokeShape="RoundRectangle 15"
+                        Margin="15">
+
+                    <Image Source="{Binding Rington.ImageSource}"
+                           Aspect="AspectFill"
+                           WidthRequest="300"
+                           HeightRequest="300"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+
+                </Border>
+
+            <Label Text="{Binding Rington.Titel}"
+                   TextColor="White"
+                   FontSize="Title"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center" />
+
+            <Label Text="{Binding Rington.ArtistName}"
+                   TextColor="White"
+                   FontSize="Medium"
+                   Margin="5"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center" />
+
+            <toolkit:MediaElement x:Name="mediaElement"
+                                  Source="{Binding Rington.AudioSource}"
+                                  ShouldAutoPlay="False"
+                                  MediaEnded="OnMediaEnded"/>
+
+            <HorizontalStackLayout HorizontalOptions="Center"
+                                   Spacing="30">
+
+                <Image Source="upload.svg"
+                       WidthRequest="30"
+                       HeightRequest="30"/>
+
+                <Image Source="heart.svg"
+                       WidthRequest="30"
+                       HeightRequest="30"/>
+                           
+                <ImageButton x:Name="playPauseButton"
+                             Source="play.svg"
+                             WidthRequest="70"
+                             HeightRequest="70"
+                             CornerRadius="35"
+                             BackgroundColor="White"
+                             Clicked="PlayPauseSoundButton"/>
+
+                <Image Source="download.svg"
+                       WidthRequest="30"
+                       HeightRequest="30"/>
+
+                <Image Source="dots.svg"
+                       WidthRequest="30"
+                       HeightRequest="30"/>
+
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+
+        </Frame>
+        
+    </VerticalStackLayout>
+
+</ContentPage>
